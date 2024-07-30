@@ -1,0 +1,206 @@
+{
+  "id": "33c7c010-9aed-4e42-8e77-6862be1e39a2",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public._coins": {
+      "name": "_coins",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "symbol": {
+          "name": "symbol",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_price": {
+          "name": "current_price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "market_cap": {
+          "name": "market_cap",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "market_cap_rank": {
+          "name": "market_cap_rank",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fully_diluted_valuation": {
+          "name": "fully_diluted_valuation",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_volume": {
+          "name": "total_volume",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "high_24h": {
+          "name": "high_24h",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "low_24h": {
+          "name": "low_24h",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_change_24h": {
+          "name": "price_change_24h",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_change_percentage_24h": {
+          "name": "price_change_percentage_24h",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "market_cap_change_24h": {
+          "name": "market_cap_change_24h",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "market_cap_change_percentage_24h": {
+          "name": "market_cap_change_percentage_24h",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "circulating_supply": {
+          "name": "circulating_supply",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_supply": {
+          "name": "total_supply",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_supply": {
+          "name": "max_supply",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ath": {
+          "name": "ath",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ath_change_percentage": {
+          "name": "ath_change_percentage",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ath_date": {
+          "name": "ath_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "atl": {
+          "name": "atl",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "atl_change_percentage": {
+          "name": "atl_change_percentage",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "atl_date": {
+          "name": "atl_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "roi": {
+          "name": "roi",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_updated": {
+          "name": "last_updated",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_hour": {
+          "name": "price_hour",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_day": {
+          "name": "price_day",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_week": {
+          "name": "price_week",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_month": {
+          "name": "price_month",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
