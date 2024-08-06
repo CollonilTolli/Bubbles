@@ -11,9 +11,8 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { NewCoin } from "@/lib/db";
 
-const CoinChart = ({ coinData }: { coinData: NewCoin | null }) => {
+const CoinChart = ({ coinData }: { coinData: any | null }) => {
   ChartJS.register(
     CategoryScale,
     LinearScale,

@@ -1,9 +1,9 @@
 import {
   pgTableCreator,
   text,
-  integer,
+  decimal,
   timestamp,
-  jsonb
+  integer
 } from "drizzle-orm/pg-core";
 
 const pgTable = pgTableCreator((name) => `${name}`);
@@ -13,29 +13,32 @@ export const coins = pgTable("coins", {
   symbol: text("symbol"),
   name: text("name"),
   image: text("image"),
-  current_price: integer("current_price"), // No need to convert to string
-  market_cap: integer("market_cap"), // No need to convert to string
-  market_cap_rank: integer("market_cap_rank"), // No need to convert to string
-  fully_diluted_valuation: integer("fully_diluted_valuation"), // No need to convert to string
-  total_volume: integer("total_volume"), // No need to convert to string
-  high_24h: integer("high_24h"), // No need to convert to string
-  low_24h: integer("low_24h"), // No need to convert to string
-  price_change_24h: integer("price_change_24h"), // No need to convert to string
-  price_change_percentage_24h: integer("price_change_percentage_24h"), // No need to convert to string
-  market_cap_change_24h: integer("market_cap_change_24h"), // No need to convert to string
-  market_cap_change_percentage_24h: integer("market_cap_change_percentage_24h"), // No need to convert to string
-  circulating_supply: integer("circulating_supply"), // No need to convert to string
-  total_supply: integer("total_supply"), // No need to convert to string
-  max_supply: integer("max_supply"), // No need to convert to string
-  ath: integer("ath"), // No need to convert to string
-  ath_change_percentage: integer("ath_change_percentage"), // No need to convert to string
-  ath_date: timestamp("ath_date"), // No need to convert to string
-  atl: integer("atl"), // No need to convert to string
-  atl_change_percentage: integer("atl_change_percentage"), // No need to convert to string
-  atl_date: timestamp("atl_date"), // No need to convert to string
-  // roi_times: integer("roi_times"),
-  // roi_currency: text("roi_currency"),
-  // roi_percentage: integer("roi_percentage"),
-  last_updated: timestamp("last_updated"), // No need to convert to string
-  price_history: jsonb("price_history").default([])
+  current_price: decimal("current_price"),
+  market_cap: decimal("market_cap"),
+  market_cap_rank: decimal("market_cap_rank"),
+  fully_diluted_valuation: decimal("fully_diluted_valuation"),
+  total_volume: decimal("total_volume"),
+  high_24h: decimal("high_24h"),
+  low_24h: decimal("low_24h"),
+  price_change_24h: decimal("price_change_24h"),
+  price_change_percentage_24h: decimal("price_change_percentage_24h"),
+  market_cap_change_24h: decimal("market_cap_change_24h"),
+  market_cap_change_percentage_24h: decimal("market_cap_change_percentage_24h"),
+  circulating_supply: decimal("circulating_supply"),
+  total_supply: decimal("total_supply"),
+  max_supply: decimal("max_supply"),
+  ath: decimal("ath"),
+  ath_change_percentage: decimal("ath_change_percentage"),
+  ath_date: timestamp("ath_date"),
+  atl: decimal("atl"),
+  atl_change_percentage: decimal("atl_change_percentage"),
+  atl_date: timestamp("atl_date"),
+  last_updated: timestamp("last_updated"),
+});
+
+export const coinPriceHistory = pgTable("coin_price_history", {
+  id: integer("id").primaryKey(),
+  coinid: text("coinid").references(() => coins.id),
+  price: decimal("price"),
+  timestamp: timestamp("timestamp"),
 });

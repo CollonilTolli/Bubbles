@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { updateCoins } from '@/lib/db';
 
-const ALLOWED_IPS = ['127.0.0.1', '::1'];
+const API_KEY = process.env.API_KEY;
 
 export async function GET(request: any) {
-  const clientIP = request.headers.get('x-forwarded-for') || request.headers.get('client-ip') || request.socket.remoteAddress;
+  const apiKey = request.headers.get('Authorization');
 
-  if (!ALLOWED_IPS.includes(clientIP)) {
+  if (!apiKey || apiKey !== API_KEY) {
     return NextResponse.json({ error: 'Unauthorized access.' }, { status: 401 });
   }
 

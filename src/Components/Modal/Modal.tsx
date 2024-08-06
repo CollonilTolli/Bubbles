@@ -1,5 +1,4 @@
 import css from "./Modal.module.scss";
-import { NewCoin } from "@/lib/db";
 import React from "react";
 import Image from "next/image";
 import CoinChart from "./CoinChart/CoinChart";
@@ -12,7 +11,7 @@ const Modal = ({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  modalCoin: NewCoin | null;
+  modalCoin: any | null;
 }) => {
   console.log(modalCoin);
   const handleClose = () => {

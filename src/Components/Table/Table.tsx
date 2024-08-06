@@ -1,18 +1,34 @@
 "use client";
-import { NewCoin } from "@/lib/db";
 import css from "./Table.module.scss";
 import Image from "next/image";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination/Pagination";
 import Modal from "../Modal/Modal";
 import cn from "classnames";
+import { useQuery } from "@tanstack/react-query";
 
 interface CoinsData {
-  result: NewCoin[];
+  result: any[];
   totalPages: number;
   totalRecords: number;
 }
+const fetchCoins = async ({ queryKey }: any) => {
+  const [, currentPage] = queryKey; // Extract currentPage from queryKey
+
+  const response = await fetch(`${window.location.origin}/api/coins`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    // @ts-ignore
+    params: {
+      page: currentPage,
+      page_size: 10,
+    },
+  });
+  return response.json();
+};
+
 export default function Table() {
   const [coinsData, setCoinsData] = useState<CoinsData | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,16 +46,19 @@ export default function Table() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${window.location.origin}/api/coins`,
-          {
-            params: {
-              page: currentPage,
-              page_size: 10,
-            },
-          }
-        );
-        setCoinsData(response.data);
+        const response = await fetch(`${window.location.origin}/api/coins`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // @ts-ignore
+          params: {
+            page: currentPage,
+            page_size: 10,
+          },
+        });
+        const data = await response.json();
+        setCoinsData(data);
       } catch (error) {
         console.error("Ошибка при получении данных:", error);
       }
@@ -92,7 +111,7 @@ export default function Table() {
                 </tr>
               </thead>
               <tbody>
-                {(coinsData.result as NewCoin[]).map((el: NewCoin) => (
+                {(coinsData.result as any[]).map((el: any) => (
                   <tr key={el.id} onClick={() => openModal(el)}>
                     <td>
                       <div className={css.CoinSymbol}>

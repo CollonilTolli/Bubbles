@@ -47,8 +47,6 @@ const mockCoins = [
   MockCoin
 ];
 
-
-
 describe('getCoins', () => {
   beforeEach(() => {
     jest.spyOn(db, 'select').mockImplementation(() => ({

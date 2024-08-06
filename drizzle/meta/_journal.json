@@ -64,6 +64,34 @@
       "when": 1722363923707,
       "tag": "0008_black_mephisto",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1722976978636,
+      "tag": "0009_fair_la_nuit",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1722978797862,
+      "tag": "0010_quick_black_tom",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1722981205742,
+      "tag": "0011_unknown_vulcan",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1722983946788,
+      "tag": "0012_ordinary_black_knight",
+      "breakpoints": true
     }
   ]
 }

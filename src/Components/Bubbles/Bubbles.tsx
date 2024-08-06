@@ -9,7 +9,6 @@ import {
   handleClick,
 } from "./helpersBubble";
 import NextImage from "next/image";
-import { NewCoin } from "@/lib/db";
 import Modal from "../Modal/Modal";
 interface Bubble {
   x: number;

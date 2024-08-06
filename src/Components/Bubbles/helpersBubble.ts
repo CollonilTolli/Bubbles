@@ -46,18 +46,16 @@ const MAX_SQUARE_COEF = 0.05;
 const MIN_SQUARE_COEF = 0.007;
 
 export function newCalculation(arrayValues: number[], square: number): number[] {
-  // total square of all the items should not be more than X * square of canvas
   const totalSquare = square * SQUARE_FULFILLMENT_PERCENTAGE * 3;
-  // define max and min square, in case if there's too many / too little
   const maxSquare = totalSquare * MAX_SQUARE_COEF;
   const minSquare = totalSquare * MIN_SQUARE_COEF;
 
-  const arrayOfRoots = arrayValues.map((x) => Math.sqrt(x))
-  const sumValues = sum(arrayOfRoots) + 0.001; // sum can be 0
+  const positiveArrayValues = arrayValues.map(x => Math.abs(x));
+
+  const arrayOfRoots = positiveArrayValues.map((x) => Math.sqrt(x))
+  const sumValues = sum(arrayOfRoots) + 0.001;
 
   const squareRatio = totalSquare / sumValues;
-
-  // now, we assign bubble squares proportionally
   const calculatedSquares = arrayOfRoots.map((x) => {
     let square = squareRatio * x;
     if (square < minSquare) {
@@ -65,26 +63,22 @@ export function newCalculation(arrayValues: number[], square: number): number[] 
     } else if (square > maxSquare) {
       square = maxSquare;
     }
-
     return square;
   })
 
-  // now we cut off the values to avoid overflow if way too many minRadiuses applied
-  // ASSUMING ARRAY IS SORTED!
   let squareSum = 0;
   const updatedSquares: number[] = []
   calculatedSquares.forEach((square) => {
-    if (squareSum > totalSquare) {
-      return;
+    if (squareSum + square > totalSquare) {
+      square = totalSquare - squareSum;
     }
     squareSum += square;
     updatedSquares.push(square);
   })
 
-  const radiuses = updatedSquares.map(square => Math.sqrt(square / Math.PI))
+  const radiuses = updatedSquares.length > 0 ? updatedSquares.map(square => Math.sqrt(square / Math.PI)) : [];
   return radiuses;
 }
-
 
 export const createBubble = (
   item: NewCoin,
@@ -92,13 +86,16 @@ export const createBubble = (
   windowWidth: number,
   windowHeight: number
 ): Bubble => {
+  console.log(item, 'item')
   const x = Math.random() * windowWidth;
   const y = Math.random() * windowHeight;
   // @ts-ignore
   const course = roundToFiveDecimalPlaces(calculatePriceDifference(item.current_price, item.price_history[1]));
+  // @ts-ignore 
+  const validPrices = array.filter(coin => !isNaN(coin.current_price) && !isNaN(coin.price_history[1]) && coin.current_price >= 0 && coin.price_history[1] >= 0);
   const bubbleSizes = newCalculation(
-    // @ts-ignore
-    array.map(coin => Math.abs(calculatePriceDifference(coin.current_price, coin.price_history[1]))),
+    // @ts-ignore 
+    validPrices.map(coin => Math.abs(calculatePriceDifference(coin.current_price, coin.price_history[1]))),
     windowWidth * windowHeight
   );
   const size = bubbleSizes[array.indexOf(item)];
@@ -110,7 +107,7 @@ export const createBubble = (
   const image = new Image();
   // @ts-ignore
   image.src = item.image;
-  console.log(item)
+
   return {
     x,
     y,
@@ -277,8 +274,8 @@ export const handleMouseDown = (e: any, bubbles: Bubble[], canvasRef: any) => {
 
   if (clickedBubble) {
     clickedBubble.isDragging = true;
-    clickedBubble.startX = clickedBubble.x; // Initialize startX
-    clickedBubble.startY = clickedBubble.y; // Initialize startY
+    clickedBubble.startX = clickedBubble.x;
+    clickedBubble.startY = clickedBubble.y;
     clickedBubble.startMouseX = mouseX;
     clickedBubble.startMouseY = mouseY;
   }
@@ -332,7 +329,6 @@ export const handleClick = (e: any, bubbles: Bubble[], canvasRef: any, openModal
   });
 
   if (clickedBubble) {
-    console.log('Вы кликнули по шару:', clickedBubble);
     openModal(clickedBubble.item)
   }
 };
