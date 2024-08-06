@@ -5,29 +5,12 @@ import { useEffect, useState } from "react";
 import Pagination from "./Pagination/Pagination";
 import Modal from "../Modal/Modal";
 import cn from "classnames";
-import { useQuery } from "@tanstack/react-query";
 
 interface CoinsData {
   result: any[];
   totalPages: number;
   totalRecords: number;
 }
-const fetchCoins = async ({ queryKey }: any) => {
-  const [, currentPage] = queryKey; // Extract currentPage from queryKey
-
-  const response = await fetch(`${window.location.origin}/api/coins`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    // @ts-ignore
-    params: {
-      page: currentPage,
-      page_size: 10,
-    },
-  });
-  return response.json();
-};
 
 export default function Table() {
   const [coinsData, setCoinsData] = useState<CoinsData | null>(null);
